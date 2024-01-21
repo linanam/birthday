@@ -63,7 +63,7 @@ $(document).ready(function(){
     }
 
     function changeMission(num) {
-        audio.setAttribute('src', `tasks/0${num}.mp3`);
+        audio.setAttribute('src', `0${num}.mp3`);
         audio.load();
         audio.play();
     }
