@@ -1,39 +1,81 @@
-var audio, context, analyser, src, array, logo;
+$(document).ready(function(){
+    let mission_count = 0;
+    let timer = 0;
+    const code = $('#code');
+    const bars = $('#bars');
+    const count = $('#count');
+    const number = $('#number');
+    const audio = document.getElementById("audio");
+    
 
-logo = document.getElementById("logo").style;
+	code.on('keypress', function(e){
+        if (e.keyCode === 13) {
+            let target = $(e.currentTarget);
+            code.addClass('active');
+            switch (target.val()) {
+                case 'start': {
+                    mission_count = 1;     
+                    count.text(mission_count);               
+                    setTimeout(() => {
+                        playAudio();            
+                    }, 500);
+                    break;
+                }
+                case 'next': {
+                    mission_count++;
+                    count.text(mission_count);     
+                    changeMission(mission_count);
+                    break;
+                }
+            }
+            clearInput();
+        }
+	});
 
-audio = document.getElementById("audio");
+    number.on('keypress', function(e){
+        if (e.keyCode === 13) {
+            mission_count = number.val();
+            changeMission(mission_count);
+            number.val('');
+            number.blur();
+        }
+	});
 
-window.onclick = function(){
-    if(!context){
-        preparation();
+    audio.onplay = function() { 
+        setTimeout(() => {
+            bars.addClass('active');
+        }, 700);
+    };
+
+    audio.onpause = function() {
+        stopAudio();
+    };
+
+    audio.onended = function() {
+        stopAudio();
+    };
+  
+    function clearInput() {
+        timer = setTimeout(() => {
+            code.val('').removeClass('active');
+            code.blur();
+        }, 1500);
     }
-    context = new AudioContext();
-    analyser = context.createAnalyser();
-    if(audio.paused){
+
+    function changeMission(num) {
+        audio.setAttribute('src', `tasks/0${num}.mp3`);
+        audio.load();
         audio.play();
-        loop();
-    }else{
-        audio.pause();
     }
-}
 
-function preparation(){
-    context = new AudioContext();
-    analyser = context.createAnalyser();
-    src = context.createMediaElementSource(audio);
-    src.connect(analyser);
-    analyser.connect(context.destination);
-    loop();
-}
-
-function loop(){
-    if(!audio.paused){
-        window.requestAnimationFrame(loop);
+    function playAudio() {
+        audio.play();
     }
-    array = new Uint8Array(analyser.frequencyBinCount);
-    analyser.getByteFrequencyData(array);
 
-    logo.minHeight = (array[40])+"px";
-    logo.width =  (array[40])+"px";
-}
+    function stopAudio() {
+        setTimeout(() => {
+            bars.removeClass('active');
+        }, 400);
+    }
+      
+});
