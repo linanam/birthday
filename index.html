@@ -1,47 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-	  <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Sekret</title>
-	  <link rel="stylesheet" href="main.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	  <script src="script.js"></script>
-   </head>
-   <body>
-		<div class="main">
-			<div id="bars" class="bars">
-				<div class="wrapper">
-					<div class="bar"></div>
-					<div class="bar"></div>
-					<div class="bar"></div>
-					<div class="bar"></div>
-					<div class="bar"></div>
-					<div class="bar"></div>
-					<div class="bar"></div>
-					<div class="bar"></div>
-					<div class="bar"></div>
-					<div class="bar"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lego game</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
 
-					<div class="bar bar1"></div>
-					<div class="bar bar2"></div>
-					<div class="bar bar3"></div>
-					<div class="bar bar4"></div>
-					<div class="bar bar5"></div>
-					<div class="bar bar6"></div>
-					<div class="bar bar7"></div>
-					<div class="bar bar8"></div>
-					<div class="bar bar9"></div>
-					<div class="bar bar10"></div>
-				</div>
-			  </div>
-			  <input type="text" value="" id="code" class="code" />
-			  <audio  id="audio" controls>
-				<source src="01.mp3" type="audio/mpeg">
-			  		Your browser does not support the audio element.
-			  </audio>
-			  <div id="count"></div>
-			  <input type="text" value="" id="number" class="number" />
-		</div>
-   </body>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 40px;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container div {
+        display: none;
+        font-size: 18px;
+        line-height: 1.5;
+        justify-content: center;
+        align-items: center;
+        height: 150px;
+        width: 300px;
+        padding: 20px;
+        border: 2px solid #222;
+      }
+
+      .container .active {
+        display: flex;
+      }
+
+      button {
+        background-color: rgba(122, 6, 6);
+        border: 0;
+        padding: 12px 24px;
+        font-size: 18px;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="container">
+      <div>Вулкан собирается извергаться. Найдите способ спастись!</div>
+
+      <div>Надвигается ураган. Постройте прочное убежище с крышей!</div>
+
+      <div>
+        Спасательный самолет над головой. Найдите способ подать им сигнал!!!
+      </div>
+
+      <div>Вторжение зомби!!! Найдите способ защитить себя.</div>
+
+      <div>
+        У вас закончилась еда. Постройте что-нибудь, чтобы чтобы не умереть с
+        голоду.
+      </div>
+
+      <div>
+        Вам очень РЕАЛЬНО скучно. Постройте что-нибудь, чтобы развлечь себя.
+      </div>
+
+      <div>Вы хотите пить. Постройте новый источник воды.</div>
+
+      <div>
+        Вы поймали животное! Постройте любое животное, какое захотите, и а затем
+        сделайте для него клетку.
+      </div>
+
+      <div>Вы ожидаете компания. Постройте новую комнату для друга.</div>
+
+      <div>Вы устали ходить повсюду. Постройте транспортное средство.</div>
+
+      <div>
+        Пираты хотят украсть ваши вещи!!! Постройте что-нибудь, чтобы отпугнуть
+        их.
+      </div>
+
+      <div>
+        Ваш остров начинает тонуть! Постройте что-нибудь высокое, чтобы
+        перебраться на на более высокую землю.
+      </div>
+
+      <div>
+        У вас нет энергии! Постройте что-нибудь, чтобы чтобы генерировать
+        электричество.
+      </div>
+
+      <div>На вашем острове! Постройте ловушку, чтобы чтобы поймать их!!!</div>
+
+      <div>
+        Постройте робота, который будет выполнять работу за вас, например,
+        рубить дрова или собирать еду.
+      </div>
+
+      <div>
+        Теперь ваш остров - горячее место для отдыха! Постройте что-нибудь,
+        чтобы привлечь туристов!
+      </div>
+
+      <button class="disaster" id="disaster-btn">Катастрофа</button>
+    </div>
+
+    <script>
+      const container = document.getElementById("container");
+      const disasterBtn = document.getElementById("disaster-btn");
+      const cards = container.querySelectorAll("div");
+      const cardCount = cards.length;
+
+      disasterBtn.addEventListener("click", () => {
+        container.querySelector(".active")?.classList.remove("active");
+        let nodes = Array.prototype.slice.call(cards);
+        let activeCard = nodes[getRandomNumber(cardCount - 1)];
+        activeCard?.classList.add("active");
+      });
+
+      function getRandomNumber(max, min = 0) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+    </script>
+  </body>
 </html>
