@@ -1,81 +1,27 @@
-$(document).ready(function(){
-    let mission_count = 0;
-    let timer = 0;
-    const code = $('#code');
-    const bars = $('#bars');
-    const count = $('#count');
-    const number = $('#number');
-    const audio = document.getElementById("audio");
-    
+let textItems = [];
 
-	code.on('keypress', function(e){
-        if (e.keyCode === 13) {
-            let target = $(e.currentTarget);
-            code.addClass('active');
-            switch (target.val()) {
-                case 'start': {
-                    mission_count = 1;     
-                    count.text(mission_count);               
-                    setTimeout(() => {
-                        playAudio();            
-                    }, 500);
-                    break;
-                }
-                case 'next': {
-                    mission_count++;
-                    count.text(mission_count);     
-                    changeMission(mission_count);
-                    break;
-                }
-            }
-            clearInput();
-        }
-	});
+// Fetch data from JSON file
+fetch("data.json")
+  .then((response) => response.json())
+  .then((data) => {
+    textItems = data.textItems;
+    document.getElementById("output").textContent =
+      "Click the button to generate text";
+  })
+  .catch((error) => {
+    console.error("Error loading data:", error);
+    document.getElementById("output").textContent = "Error loading text data";
+  });
 
-    number.on('keypress', function(e){
-        if (e.keyCode === 13) {
-            mission_count = number.val();
-            changeMission(mission_count);
-            number.val('');
-            number.blur();
-        }
-	});
+// Generate random text
+function generateText() {
+  if (textItems.length === 0) {
+    document.getElementById("output").textContent = "Text data not loaded yet";
+    return;
+  }
+  const randomIndex = Math.floor(Math.random() * textItems.length);
+  document.getElementById("output").textContent = textItems[randomIndex];
+}
 
-    audio.onplay = function() { 
-        setTimeout(() => {
-            bars.addClass('active');
-        }, 700);
-    };
-
-    audio.onpause = function() {
-        stopAudio();
-    };
-
-    audio.onended = function() {
-        stopAudio();
-    };
-  
-    function clearInput() {
-        timer = setTimeout(() => {
-            code.val('').removeClass('active');
-            code.blur();
-        }, 1500);
-    }
-
-    function changeMission(num) {
-        audio.setAttribute('src', `0${num}.mp3`);
-        audio.load();
-        audio.play();
-    }
-
-    function playAudio() {
-        audio.play();
-    }
-
-    function stopAudio() {
-        setTimeout(() => {
-            bars.removeClass('active');
-        }, 400);
-    }
-      
-});
+// Event listener
+document.getElementById("generate-btn").addEventListener("click", generateText);

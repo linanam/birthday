@@ -1,147 +1,47 @@
-:root {
-    --bar-width: 10px;
-    --bar: 5px;
-    --start: 1px;
-    --min-height: 3px;
-    --max-height: 58px;
-    --x: 1.5;
-    --bar-color: #12E2DC;
-    --bg-color: #020626;
-    --width: 216px;
-    --padding: 20px;
-    --border-width: 2px;
-}
-
 body {
-    margin: 0;
-    background-color: var(--bg-color);
-    font-family: "Courier New";
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
 }
 
-
-.bars {
-    height: 200px;
-    width: var(--width);
-    border: var(--border-width) solid var(--bar-color);
-    padding: 0 var(--padding);
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.bars .wrapper {
-    height: 100%;
-    position: relative;
+h1 {
+  text-align: center;
+  color: #333;
 }
 
-.bar {
-    background-color: var(--bar-color);
-    bottom: 1px;
-    position: absolute;
-    width: var(--bar);
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.active .bar {
-    height: 3px;
-    animation: sound 0ms -800ms linear infinite alternate;
+button:hover {
+  background: #45a049;
 }
 
-input[type="text"],
-input[type="text"]:focus {
-    text-align: center;
-    outline: none;
+.output {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-height: 50px;
+  background: #f9f9f9;
+  text-align: center;
 }
-
-.code,
-.code:focus {
-    height: 40px;
-    width: var(--width);
-    padding-left: var(--padding);
-    padding-right: var(--padding);
-    font-size: 40px;
-	font-family: "Courier New";
-    text-transform: uppercase;
-    font-weight: 600;
-    background-color: var(--bar-color);
-    border: var(--border-width) solid var(--bar-color);
-    color: var(--bar-color);
-    transition: 0.5s all 1s ease;
-}
-
-.code.active {
-    font-size: 0;
-}
-
-.number {
-    background-color: var(--bar-color);
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 40px;
-    width: 100%;
-    border: 0;
-    color: var(--bar-color);
-}
-
-.main {
-    background: url(computer.png) no-repeat 50% 190px;
-    background-size: 60px auto;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 165px 0 50px;
-}
-
-audio {
-    display: none;
-}
-
-#count {
-    color: var(--bar-color);
-    font-size: 10px;
-    position: fixed;
-    right: 0;
-    bottom: 0;
-}
-
-@keyframes sound {
-    0% {
-        opacity: .35;
-        height: var(--min-height); 
-    }
-    100% {
-        opacity: 1;       
-        height: var(--max-height);        
-    }
-}
-.active .bar:nth-child(1) { left: 1px; }
-.active .bar:nth-child(2)  { left: calc(2px + var(--bar-width) * 1); }
-.active .bar:nth-child(3)  { left: calc(3px + var(--bar-width) * 2); }
-.active .bar:nth-child(4)  { left: calc(4px + var(--bar-width) * 3);  }
-.active .bar:nth-child(5)  { left: calc(5px + var(--bar-width) * 4); }
-.active .bar:nth-child(6)  { left: calc(6px + var(--bar-width) * 5); }
-.active .bar:nth-child(7) { left: calc(7px + var(--bar-width) * 6);  }
-.active .bar:nth-child(8)  { left: calc(8px + var(--bar-width) * 7);  }
-.active .bar:nth-child(9)  { left: calc(9px + var(--bar-width) * 8);  }
-.active .bar:nth-child(10)  { left: calc(10px + var(--bar-width) * 9);  }
-
-.active .bar1  { left: calc(11px + var(--bar-width) * 10); }
-.active .bar2  { left: calc(12px + var(--bar-width) * 11); }
-.active .bar3  { left: calc(13px + var(--bar-width) * 12);  }
-.active .bar4  { left: calc(14px + var(--bar-width) * 13); }
-.active .bar5  { left: calc(15px + var(--bar-width) * 14); }
-.active .bar6  { left: calc(16px + var(--bar-width) * 15);  }
-.active .bar7  { left: calc(17px + var(--bar-width) * 16);  }
-.active .bar8  { left: calc(18px + var(--bar-width) * 17);  }
-.active .bar9  { left: calc(19px + var(--bar-width) * 18);  }
-.active .bar10 { left: calc(20px + var(--bar-width) * 19);  }
-
-.active .bar:nth-child(1), .active .bar3 { animation-duration: calc(var(--x) * 474ms); }
-.active .bar:nth-child(2), .active .bar7  { animation-duration: calc(var(--x) * 433ms); }
-.active .bar:nth-child(3), .active .bar1  { animation-duration: calc(var(--x) * 407ms); }
-.active .bar:nth-child(4), .active .bar10  { animation-duration: calc(var(--x) * 458ms); }
-.active .bar:nth-child(5), .active .bar5  { animation-duration: calc(var(--x) * 400ms); }
-.active .bar:nth-child(6), .active .bar2  { animation-duration: calc(var(--x) * 427ms); }
-.active .bar:nth-child(7), .active .bar9 { animation-duration: calc(var(--x) * 441ms); }
-.active .bar:nth-child(8), .active .bar8  {  animation-duration: calc(var(--x) * 419ms); }
-.active .bar:nth-child(9), .active .bar4  { animation-duration: calc(var(--x) * 487ms); }
-.active .bar:nth-child(10), .active .bar6  { animation-duration: calc(var(--x) * 442ms); }

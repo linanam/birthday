@@ -1,130 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lego game</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .container {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-        gap: 40px;
-        height: 100vh;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .container div {
-        display: none;
-        font-size: 26px;
-        line-height: 1.5;
-        justify-content: center;
-        align-items: center;
-        height: 150px;
-        width: 400px;
-        padding: 20px 30px;
-        border: 2px solid #222;
-      }
-
-      .container .active {
-        display: flex;
-      }
-
-      button {
-        background-color: rgba(122, 6, 6);
-        border: 0;
-        padding: 24px 24px;
-        font-size: 26px;
-        color: #fff;
-        border-radius: 50%;
-        width: 200px;
-        height:200px;
-      }
-    </style>
+    <title>Simple Text Generator</title>
+    <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <div class="container" id="container">
-      <div>Вулкан собирается извергаться. Найдите способ спастись!</div>
-
-      <div>Надвигается ураган. Постройте прочное убежище с крышей!</div>
-
-      <div>
-        Спасательный самолет над головой. Найдите способ подать им сигнал!!!
-      </div>
-
-      <div>Вторжение зомби!!! Найдите способ защитить себя.</div>
-
-      <div>
-        У вас закончилась еда. Постройте что-нибудь, чтобы чтобы не умереть с
-        голоду.
-      </div>
-
-      <div>Вы хотите пить. Постройте новый источник воды.</div>
-
-      <div>
-        Вы поймали животное! Постройте любое животное, какое захотите, и а затем
-        сделайте для него клетку.
-      </div>
-
-      <div>Вы ожидаете компания. Постройте новую комнату для друга.</div>
-
-      <div>Вы устали ходить повсюду. Постройте транспортное средство.</div>
-
-      <div>
-        Пираты хотят украсть ваши вещи!!! Постройте что-нибудь, чтобы отпугнуть
-        их.
-      </div>
-
-      <div>
-        Ваш остров начинает тонуть! Постройте что-нибудь высокое, чтобы
-        перебраться на на более высокую землю.
-      </div>
-
-      <div>
-        У вас нет энергии! Постройте что-нибудь, чтобы чтобы генерировать
-        электричество.
-      </div>
-
-      <div>На вашем острове воришка! Постройте ловушку, чтобы чтобы поймать их!!!</div>
-
-      <div>
-        Постройте робота, который будет выполнять работу за вас, например,
-        рубить дрова или собирать еду.
-      </div>
-
-      <div>
-        Теперь ваш остров - горячее место для отдыха! Постройте что-нибудь,
-        чтобы привлечь туристов!
-      </div>
-
-      <button class="disaster" id="disaster-btn">Катастрофа</button>
+    <div class="container">
+      <h1>Lego Приключения на острове</h1>
+      <button id="generate-btn">Катастрофа</button>
+      <div class="output" id="output">Загрузка...</div>
     </div>
-
-    <script>
-      const container = document.getElementById("container");
-      const disasterBtn = document.getElementById("disaster-btn");
-      const cards = container.querySelectorAll("div");
-      const cardCount = cards.length;
-
-      disasterBtn.addEventListener("click", () => {
-        container.querySelector(".active")?.classList.remove("active");
-        let nodes = Array.prototype.slice.call(cards);
-        let activeCard = nodes[getRandomNumber(cardCount - 1)];
-        activeCard?.classList.add("active");
-      });
-
-      function getRandomNumber(max, min = 0) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
-      }
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
